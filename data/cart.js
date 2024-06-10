@@ -26,3 +26,10 @@ export function addToCart(productId){
   };
 console.log(cart);
 };
+
+export function removeFromCart(productId){
+  let cartItem = cart.find((cartItem)=> cartItem.productId === productId);
+  const index = cart.indexOf(cartItem);
+  cart.splice(index,1)
+  
+};
