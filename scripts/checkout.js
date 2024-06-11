@@ -5,20 +5,15 @@ import  dayjs from 'https://unpkg.com/dayjs@1.8.9/esm/index.js';
 import { deliveryOptions } from '../data/deliveryOptions.js';
 
 
-let summaryHtml = '';
+function renderOrderSummary(){ 
+let cartSummaryHtml = '';
 const today = dayjs();
 const deliveryDate = today.add(7,'days');
-console.log(deliveryDate.format('dddd, MMM, D'))
+// console.log(deliveryDate.format('dddd, MMM, D'))
 
-  cart.forEach((cartItem)=>{
-  const productId = cartItem.productId;
-  const matchingProduct = products.find((product)=> product.id === productId);
-  // let matchingProduct;
-  // products.forEach((product)=> {
-  //   if(product.id === productId){
-  //     matchingProduct = product;
-  //   }
-  // });
+cart.forEach((cartItem)=>{
+const productId = cartItem.productId;
+const matchingProduct = products.find((product)=> product.id === productId);
 const index = cart.indexOf(cartItem);
 
 const deliveryOptionId = cartItem.deliveryOptionId;
@@ -27,7 +22,7 @@ const today = dayjs();
 const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
 const deliveryDateString = deliveryDate.format('dddd, MMM, D');
 
-  summaryHtml += `
+  cartSummaryHtml += `
   <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
       <div class="delivery-date js-delivery-date">
         Delivery date: ${deliveryDateString}
@@ -110,7 +105,7 @@ function deliveryOptionsHtml(matchingProduct, cartItem){
 };
 
 
-document.querySelector('.js-order-summary').innerHTML = summaryHtml;
+document.querySelector('.js-order-summary').innerHTML = cartSummaryHtml;
 document.querySelectorAll('.js-delete-link').forEach((link)=>{
   link.addEventListener('click',()=> {
     const productId = link.dataset.productId;
@@ -125,5 +120,9 @@ document.querySelectorAll('.js-delivery-option').forEach((buttonElement)=>{
   const { productId, deliveryOptionId } = buttonElement.dataset;
   buttonElement.addEventListener('click', ()=> {
     updateDeliveryOption(productId, deliveryOptionId);
+    renderOrderSummary();
   })
 });
+};
+
+renderOrderSummary();
