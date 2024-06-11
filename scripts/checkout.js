@@ -1,4 +1,4 @@
-import { cart, removeFromCart } from '../data/cart.js';
+import { cart, removeFromCart, updateDeliveryOption } from '../data/cart.js';
 import { products } from '../data/products.js';
 import  formatCurrency  from './utils/money.js';
 import  dayjs from 'https://unpkg.com/dayjs@1.8.9/esm/index.js';
@@ -88,20 +88,22 @@ function deliveryOptionsHtml(matchingProduct, cartItem){
     ; 
 
    html += `
-    <div class="delivery-option">
-              <input type="radio"
+      <div class="delivery-option js-delivery-option"
+        data-product-id="${matchingProduct.id}"
+        data-delivery-option-id="${deliveryOption.id}">
+        <input type="radio"
                 ${checked}
-                class="delivery-option-input"
-                name="delivery-option-${matchingProduct.id}">
-              <div>
-                <div class="delivery-option-date">
-                  ${deliveryDateString}
-                </div>
-                <div class="delivery-option-price">
-                  ${deliveryFee} - Shipping
-                </div>
-              </div>
-            </div>
+          class="delivery-option-input"
+          name="delivery-option-${matchingProduct.id}">
+        <div>
+          <div class="delivery-option-date">
+            ${deliveryDateString}
+          </div>
+          <div class="delivery-option-price">
+            ${deliveryFee} - Shipping
+          </div>
+        </div>
+      </div>
     `
   });
   return html;
@@ -116,5 +118,12 @@ document.querySelectorAll('.js-delete-link').forEach((link)=>{
     const container = document.querySelector(`.js-cart-item-container-${productId}`);
     container.remove();
 
+  })
+});
+
+document.querySelectorAll('.js-delivery-option').forEach((buttonElement)=>{
+  const { productId, deliveryOptionId } = buttonElement.dataset;
+  buttonElement.addEventListener('click', ()=> {
+    updateDeliveryOption(productId, deliveryOptionId);
   })
 });

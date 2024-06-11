@@ -1,4 +1,4 @@
-export function formatCurrency(currency){
+function formatCurrency(currency){
   return currency.toFixed(2)
 };
 
