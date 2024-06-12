@@ -1,5 +1,5 @@
 function formatCurrency(currency){
-  return currency.toFixed(2)
+  return (Math.round(currency)/100).toFixed(2);
 };
 
 export default formatCurrency;

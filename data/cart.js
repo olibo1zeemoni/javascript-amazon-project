@@ -77,7 +77,7 @@ function paymentSummaryInit(){
 
 export function paymentSummaryMoney(){
   let grandTotal = paymentSummaryInit();
-  return formatCurrency(grandTotal/100);
+  return formatCurrency(grandTotal);
 };
 
 function shipping(){
@@ -93,12 +93,12 @@ function shipping(){
 
 export function shippingFee(){
   let shippingTotalFee = shipping();
-  return formatCurrency(shippingTotalFee/100);
+  return formatCurrency(shippingTotalFee);
 };
 
 export function totalBeforeTax(){
   let total = paymentSummaryInit() + shipping();
-  return formatCurrency(total/100);
+  return formatCurrency(total);
 }
 
 function estimatedTax(){
@@ -108,12 +108,12 @@ function estimatedTax(){
   return estimatedTax
 }
 export function estimatedTaxRender(){
-  return formatCurrency(estimatedTax()/100);
+  return formatCurrency(estimatedTax());
 }
 
 export function grandTotal(){
   let totalBeforeTax = paymentSummaryInit() + shipping();
   let tax = estimatedTax();
   let total = totalBeforeTax + tax;
-  return formatCurrency(total/100);
+  return formatCurrency(total);
 }

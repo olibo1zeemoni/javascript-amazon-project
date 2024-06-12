@@ -38,7 +38,7 @@ const deliveryDateString = deliveryDate.format('dddd, MMM, D');
             ${matchingProduct.name}
           </div>
           <div class="product-price">
-            $${formatCurrency(matchingProduct.priceCents/100)}
+            $${formatCurrency(matchingProduct.priceCents)}
           </div>
           <div class="product-quantity">
             <span>
@@ -76,7 +76,7 @@ function deliveryOptionsHtml(matchingProduct, cartItem){
 
     const deliveryFee = deliveryOption.priceCents === 0 
     ?  "FREE"
-    : `$${formatCurrency(deliveryOption.priceCents/100)}`
+    : `$${formatCurrency(deliveryOption.priceCents)}`
 
     const checked =  deliveryOption.id === cartItem.deliveryOptionId
     ? 'checked'
