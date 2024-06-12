@@ -1,9 +1,9 @@
-import { cart, estimatedTaxRender, grandTotal, paymentSummaryMoney, shippingFee, totalBeforeTax } from "../../data/cart.js";
+import * as Cart from "../../data/cart.js";
 
 export function renderPaymentSummary(){
   let cartQuantity = 0;
 
-  cart.forEach((cartItem)=> {
+  Cart.cart.forEach((cartItem)=> {
     cartQuantity += cartItem.quantity
   })
 
@@ -17,27 +17,27 @@ export function renderPaymentSummary(){
 
     <div class="payment-summary-row">
       <div>Items (${cartQuantity}):</div>
-      <div class="payment-summary-money">$${paymentSummaryMoney()}</div>
+      <div class="payment-summary-money">$${Cart.paymentSummaryMoney()}</div>
     </div>
 
     <div class="payment-summary-row">
       <div>Shipping &amp; handling:</div>
-      <div class="payment-summary-money">$${shippingFee()}</div>
+      <div class="payment-summary-money">$${Cart.shippingFee()}</div>
     </div>
 
     <div class="payment-summary-row subtotal-row">
       <div>Total before tax:</div>
-      <div class="payment-summary-money">$${totalBeforeTax()}</div>
+      <div class="payment-summary-money">$${Cart.totalBeforeTax()}</div>
     </div>
 
     <div class="payment-summary-row">
       <div>Estimated tax (10%):</div>
-      <div class="payment-summary-money">$${estimatedTaxRender()}</div>
+      <div class="payment-summary-money">$${Cart.estimatedTaxRender()}</div>
     </div>
 
     <div class="payment-summary-row total-row">
       <div>Order total:</div>
-      <div class="payment-summary-money">$${grandTotal()}</div>
+      <div class="payment-summary-money">$${Cart.grandTotal()}</div>
     </div>
 
     <button class="place-order-button button-primary">
@@ -45,8 +45,8 @@ export function renderPaymentSummary(){
     </button>
     `
   document.querySelector('.js-payment-summary').innerHTML = paymentSummaryHtml;
-  paymentSummaryMoney();
-  totalBeforeTax();
+  Cart.paymentSummaryMoney();
+  Cart.totalBeforeTax();
 };
 
 
