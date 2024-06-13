@@ -1,4 +1,6 @@
 import formatCurrency from "../scripts/utils/money.js";
+
+
 console.log('test suite: formatCurrency');
 
 console.log('rounds down nearest cent');
