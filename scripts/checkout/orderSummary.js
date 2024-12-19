@@ -24,7 +24,9 @@ const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
 const deliveryDateString = deliveryDate.format('dddd, MMM, D');
 
   cartSummaryHtml += `
-  <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
+  <div class="cart-item-container
+  js-cart-item-container
+  js-cart-item-container-${matchingProduct.id}">
       <div class="delivery-date js-delivery-date">
         Delivery date: ${deliveryDateString}
       </div>
@@ -40,14 +42,16 @@ const deliveryDateString = deliveryDate.format('dddd, MMM, D');
           <div class="product-price">
             $${formatCurrency(matchingProduct.priceCents)}
           </div>
-          <div class="product-quantity">
+          <div class="product-quantity
+            js-product-quantity-${matchingProduct.id}">
             <span>
               Quantity: <span class="quantity-label">${cartItem.quantity}</span>
             </span>
             <span class="update-quantity-link link-primary">
               Update
             </span>
-            <span class="delete-quantity-link link-primary js-delete-link"
+            <span class="delete-quantity-link link-primary js-delete-link
+            js-delete-link-${matchingProduct.id}"
             data-product-id=${matchingProduct.id}
             >
               Delete
